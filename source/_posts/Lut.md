@@ -1,5 +1,7 @@
 ---
 title: 美颜你的Unity--使用Lut为Unity调色
+tags: PostProcessing
+categories: Unity
 ---
 
 ![](http://wx2.sinaimg.cn/mw690/bcd85caely1fg8gtni8luj21kw0vz1ex.jpg)
@@ -21,7 +23,7 @@ title: 美颜你的Unity--使用Lut为Unity调色
 ![5.6之前的版本，带有Image Effect ](http://wx2.sinaimg.cn/mw690/bcd85caely1fg8i7cpjk7j20i30hs40h.jpg) 
 
 ![5.6的版本，移除了Image Effect相关脚本](http://wx4.sinaimg.cn/mw690/bcd85caely1fg8i7cewjkj20i30fitab.jpg) 
- 
+
 ![官方对于组件更新的说明](http://wx4.sinaimg.cn/mw690/bcd85caely1fg8i7c3122j207m06ijre.jpg) 
 
 

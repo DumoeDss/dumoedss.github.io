@@ -1,10 +1,14 @@
 # Header Menu
 menu:
-  Home: /
-  Archives: /archives
+  首页: /
+  分类: /categories
+  标签: /tags
+  归档: /archives
+  关于: /about
+  文章: /article
   # change github and email values to your own addresses
-  Github: https://github.com/<your-github-username>
-  Email: mailto:<your-email-address>
+  #Github: https://github.com/<your-github-username>
+  #Email: mailto:<your-email-address>
 rss: /atom.xml
 
 # Set to false to disable banner
@@ -23,7 +27,7 @@ use_header_cover: true
 # or
 # Specify an online resource like so:
 # index_cover: http://somewhere.com/path/to/banner.jpg
-index_cover: /img/default-banner-dark.jpg
+index_cover: /img/Illya3.jpg
 
 widgets:
 - category
@@ -39,4 +43,3 @@ favicon: /favicon.png
 
 # Google Analytics Tracking ID
 google_analytics:
-
