@@ -2,7 +2,7 @@
 title: StrangeIoc框架介绍
 date: 2018-01-04 23:58:53
 tags: Unity,StrangeIoc
-categories: Unity
+categories: StrangeIoc
 ---
 
 ![](http://strangeioc.github.io/strangeioc/class-flow.png)
@@ -22,37 +22,60 @@ GAD翻译[Unity StrangeIoc 框架介绍](http://gad.qq.com/article/detail/19392)
 ## 介绍
 
 　　Strange 是一个轻量的高扩展性的控制反转框架，专为C#和Unity而设计，它拥有如下特点，大部分特点是可选的：
-　　一个核心的绑定系统，可以支持各种绑定（bindone or more of anything to one or more of anything else.）
-依赖注入
-1、映射为单例，值或者工厂（每次需要时创建一个新的实例）
-2、命名注入
-3、 构造函数注入或者setter注入（可以理解为属性注入）
-4、标记指定的构造函数
-5、标记指定函数在构造函数之后触发
-6、注入到Monobehiavours
-7、多态绑定：可以绑定接口或者实体类
-　　两种风格的共享事件桥（Two styles of shared event bus）
-1、都可以发送信号到程序的任何地方
-2、都会为本地通信映射本地的事件桥
-3、都会映射事件到相应的Command类来分离逻辑
-4、使用新的信号实现增加了类型安全保证
-　　MonoBehaviour 中介
-1、帮助分离view与逻辑
-2、隔离unity特有的代码与其它逻辑代码
-　　可选的MVCS（Model/View/Controller/Service）结构
-　　多个Context
-1、允许子控件（子场景）单独运行，或者运行在主app之中
-2、允许Context之间通信
+
+* 一个核心的绑定系统，可以支持各种绑定
+
+
+* 依赖注入
+
+> * 映射为单例，值或者工厂（每次需要时创建一个新的实例）
+
+> * 命名注入
+
+> * 构造函数注入或者setter注入（可以理解为属性注入）
+
+> * 标记指定的构造函数
+
+> * 标记指定函数在构造函数之后触发
+
+> * 注入到Monobehiavours
+
+> * 多态绑定：可以绑定接口或者实体类
+
+* 两种风格的共享事件桥（通过Event或者Signal传递消息）
+
+> * 都可以发送信号到程序的任何地方
+
+> * 都会为本地通信映射本地的事件桥
+
+> * 都会映射事件到相应的Command类来分离逻辑
+
+> * 使用新的信号实现增加了类型安全保证
+
+* MonoBehaviour 中介
+
+> * 帮助分离view与逻辑
+
+> * 隔离unity特有的代码与其它逻辑代码
+
+* 可选的MVCS（Model/View/Controller/Service）结构
+* 多个Context
+
+> * 允许子控件（子场景）单独运行，或者运行在主app之中
+
+> * 允许Context之间通信
+
 　　扩展简单，可以自建新的绑定器：
 
-## 目录介绍：
+### 目录介绍：
 
-　　在项目的StrangeIoC > scripts > strange 目录下面有三个子目录，如果在unity里面只能看到两个：
-　　Framework 包含构成Strange的主要类
-　　Extensions 库函数
-　　tests 单元测试
+在项目的StrangeIoC > scripts > strange 目录下面有三个子目录，如果在unity里面只能看到两个：
 
-## 1、绑定
+* framework:  包含构成Strange的主要类
+* extensions: 库函数
+* tests: 单元测试
+
+## 绑定
 
 　　Strange 的核心内容是对于绑定的一个简单包装。也就是说，基本上我们可以建立各种绑定（bind，connect）。可以绑定一个接口到它的实体类上面。或者绑定一个事件到一个处理者（handler）上。或者绑定两个类：当一个被实例化时，自动创建另一个的实例。为何我们要这么做？很高兴你问了这个问题！当我们编程的时候，大部分的工作最后其实都是绑定。如果你曾触发过一个事件（或者使用Unity3D的SendMessage），如果你遇到过一个类要调用另一个类，如果你写了太多的“if…else”语句，你就是遇到了某种形式的绑定，也就是说，你曾把某些东西与另一些东西绑定。
 　　但是直接把一些东西绑定到一起会产生问题，因为这么做会造成代码很难去改变，而且容易出bug。例如，我肯定你编写过表达这类结构的代码：“一个东西，包含了另一些东西作为它的组成部分”。比如一个飞船的类，包含一个炮台和一个键盘控制，你实现了它，一切都看起来很好，直到你的老板说他不想要键盘控制，他想要鼠标控制。所以你重写了飞船类，但是等等，你的飞船类其实并没有改变，只是控制改变了，所以为何你要重写飞船类？
@@ -104,7 +127,7 @@ binding.To<WarpDrive>();
 　　区别仅仅是语法糖而已。
 　　绑定的形式无穷无尽，Strange提供给你几个非常有用的绑定形式。不仅如此，整个绑定框架是很简单的，所以你可以自己去扩展，创建新的绑定器组件。下面的章节我们会一一介绍这些形式。
 
-## 2、扩展
+## 扩展
 
 　　或许你曾听说过Strange是一个依赖注入框架。我对这个描述感到些许不适。是的，Strange提供依赖注入（DI）并且它很有用，但是这个框架的核心，正如我提过的，是绑定（binding）。安装框架时会附带几个有用绑定器扩展，这个部分我们会详细讲解这几个扩展。记住，这并不阻碍你自己去实现你的自定义扩展。
 　　注意：下面的章节我提到的是MVCSContext版的Strange，是推荐版本，这个版本包含了下面提到的所有扩展。这是开始学习Strange的最佳方法。
@@ -202,7 +225,8 @@ class Spaceship : ISpaceship
 
 　　值得一提的是，即使你不使用依赖注入，这个[inject]标签也是完全无害的，所以你可以把它加到你的类里，如果有一天你不想使用依赖注入了，这个标签一点也不会影响现有的代码，去掉标签，“weapon”就成了一个普通的属性。
 
-实例化可注入的对象（instances）
+#### 实例化可注入的对象（instances）
+
 　　这里有一个地方要注意。如果你想得到依赖注入带来的好处，你需要做如下两件事：
 1、在Context中绑定相关类，这一点在上面已经讨论过。
 2、使用InjectionBinder实例化所需对象
@@ -220,7 +244,8 @@ IClass myInstance = injectionBinder.GetInstance<IClass>() as IClass;
 
 　　正如你看到的，我们还是摆脱了实体类的专制。而且你拿到的实例附带了它本身所需的全部依赖。我们要做的跟以前的老方法比仅仅是略有不同。
 
-注入映射（Injection mapping）的种类
+#### 注入映射（Injection mapping）的种类
+
 　　我们可以用多种方法来绑定注入，这些方法都很有用，其中一个很有用的绑定是ToSingleton（单例）。它的形式如下：
 
 ```
@@ -304,7 +329,8 @@ injectionBinder.Bind<IHittable>().Bind<IUpdateable>().To<Romulan>();
 
 　　这样不管[inject]标签标记了IHittable还是IUpdateable都允许你获得一个enemy（敌人）。注意，多个“Bind”是有意义的，但是多个“To”却毫无意义。你可以绑定多个接口，但是只有绑定到单个实体类型（concrete type），或者值的时候才会生效。·
 
-可注入类中的一些操作（Some thing you can do with Injectable Classes）
+#### 可注入类中的一些操作（Some thing you can do with Injectable Classes）
+
 　　在前文我层提过如何在类中声明setter注入。在这里我再重申一下，如果想要一个属性是可注入的，使用[Inject]标签：
 
 ```
@@ -380,7 +406,8 @@ public void PostConstructTwo()
 
 　　到底要用setter注入还是构造器注入呢？详细请看[这里](http://shaun.boyblack.co.za/blog/2009/05/01/constructor-injection-vs-setter-injection/)。
 
-注意：
+#### 注意：
+
 　　下面几个点在使用注入的时候要格外注意：
 1、 注意依赖回路。如果类之间相互注入，这将会导致一个依赖的死循环。Strange 会抛出一个InjectionException 异常来警告你，但是你应该第一时间避免这类情况。
 2、依赖注入使用了反射，前文说过，它的执行比较慢。Strange使用ReflectionBinder来最小化这个问题（并且效果显著），但是要考虑这个方法对于性能要求很高的代码是否可行，比如说你游戏的主循环。
@@ -560,7 +587,7 @@ namespace com.example.spacebattle.controller
 
 　　你应该差不多会理解上面的例子了。我们给gameServer发送了SendScore请求，这个请求需要处理一段时间。这个命令需要等待服务器返回结果。通过在Execute方法中第一行调用Retain()，我们将这个命令保存在了内存中。当你调用了Retain()，无论回调函数的结果是怎样，记得还要调用ReLease()，否则会造成内存泄漏。
 
-#### 映射命令（Mapping commands）
+####  映射命令（Mapping commands）
 
 　　虽然我们可以在任何地方映射命令，但是我们通常在Context中做这件事。这样当你需要时可以更方便的找出映射关系。命令映射看起来像一个注入映射：
 
@@ -706,7 +733,8 @@ using System;
 
 ```
 
-将信号映射到命令 
+#### 将信号映射到命令 
+
 　　如果你想要在你的Context中将Signal绑定到Commands（很好的想法）你需要做一些小变动。要是想要全部的Signals体验，加入如下代码到你的Context中：
 
 ```
@@ -815,7 +843,8 @@ override public void Launch()
 
 ```
 
-不需要Command来映射信号
+#### 不需要Command来映射信号
+
 　　上面提到，将Signal映射到Command会自动创建一个映射，通过注入的方式，它可以在任何地方获得，但是要是你只想要一个没有绑定Command的Signal呢？ 这种情况下，只需像如下一样用injectionBinder来创建映射，跟其他注入的类一样：
 
 ```
@@ -827,7 +856,8 @@ injectionBinder.Bind<ShipDestroyedSignal>().ToSingleton();
 
 　　MediationContext 是Strange专为Unity3D编写的部分。这是因为mediation目的是为了细致的控制你的View(视图)与程序的其它部分交互。在开发过程中View 本身就是常常变动的，把这种天然的杂乱留在view类里面处理是极其明智的选择。因此，我们建议你的view包含两个不同的MonoBehaviours：View和Mediator。
 
-View
+#### View
+
 　　View 类代表着MVCS结构这种的V，一个View就是一个MonoBehaviour，你可以编写它来控制视觉（和听觉）的输入和输出。这个类可以在Unity编辑器中挂在相关的GameObject上。如果它有公有组建，它们可以像其它正常脚本一样在编辑器中调整（Inspector上）。想要绿色的按钮吗？在View中实现吧。想要绿色按钮上面有数字吗？在View中实现吧。想要注入一个model或者service吗？等等，不要这么做！为什么呢？
 　　你的View可以被注入，但是将你的View直接与models和services绑定是非常不好的习惯。正如我说过的，你的View代码可能会变得混乱，保护其它类不受这些混乱影响是值得的。下一章我们将会带出我们认为的使用Strange开发程序的最佳架构，但是现在我们先来考虑一下你的View应该只负责做如下的事情：
 1、编写可视组建。
@@ -836,7 +866,8 @@ View
 　　通过用这三条来限制你自己，通过把所有的逻辑或者状态都放在View之外，通过拒绝将models和services注入到View里，你包装了View并且让开发更加简单，在长远来看好处会越来越突出。在这个上面请相信我。
 　　现在，在上面的第三条中我提到要暴露接口给其它角色。谁将是这个角色呢？
 
-Mediator
+#### Mediator
+
 　　Mediator类是一个单独的MonoBehaviour，它的工作是既要了解View又要了解整个程序。它是一个thin class（瘦类），也就是说它的职责会很专精。它对View有亲密的了解，而且它可以注入，并且拥有发送和接收信号的权限。所以想想绿色按钮上面的数字。你本来打算将一个service注入到View中来展示，比如说，在线好友的数量。现在你可以将service注入到mediator，但是既然Mediator应该是瘦的，更好的答案是发送一个请求，让Command来处理Service调用，然后发送一个响应。这样做代价是绕了很多弯路，但是得到是清楚的代码结构。
 　　这个是一个Mediator的示例：
 
@@ -898,7 +929,7 @@ mediationBinder.Bind<DashboardView>().To<DashboardMediator>();
 　　Context包把所有的各种不同的Binder(绑定器)包装在一起。比如说，MVCSContext包含一个EventDispatcher，一个InjectionBinder，一个MediationBinder和一个CommandBinder。你也可以，像我们讨论过的，把CommandBinder重映射到SignalCommandBinder。(Signal)CommandBinder 监听着EventDispatcher（或者Signal）。Commands和Mediators依靠Injection。Context就是我们将这些依赖联系起来的地方。建立项目时，你将要重写Context或者MVCSContext，所有使得程序正常运行的绑定将被写在在它们的子类中。
 　　多个Context也是可行的。这将是你的程序更加模块化。独立的模块可以自己运行，仅仅在需要时才与别的模块交互。因此核心游戏可以写成一个app，社交模块可以分开编写，聊天app可以作为另一个app，这个三个app在后面的开发中可以被绑定在一起，每个只需共享其它两个需要的部分。
 
-## 3、MVCSContext：整体情况
+## MVCSContext：案例
 
 　　这一章节基本上是对于如何使用Strange和它的MVCSContext创建一个app。前面几个章节，我描述了所有的组件，在这里，我将解释如何将它们结合到一起。
 　　如果要写一个游戏，使用Strange的话，应当从哪里入手呢？ 让我们从最基本的地方开始。
@@ -1215,10 +1246,10 @@ namespace strange.examples.myfirstproject
 
 　　你可以看看ExampleModel和ExampleService来弄明白它们是怎么运行的，但是它们其实很简单。Models仅仅是存数据的地方，Services是参与调用网络的。他们只有一个角色，比较简单。
 
-`不要让Model和Service监听事件。`
+*不要让Model和Service监听事件。*
 　　Model和Service都是被Command使用的，它们并不在交互链中，所以他们不应该那样使用。你可以注入它们，而且你也可以注入一个本地的dispatcher (像上面一样)用来让它给你的Commands回应。而且注入context dispatcher并且发送事件也是可以的。但是
 
-`不要让Model和Service监听事件。`
+*不要让Model和Service监听事件。*
 跨Context的映射
 　　通常来说，你应该接受Context之间存在界限的事实。毕竟存在界限是有原因的：它可以使你的一部分程序独立的运行，更加模块化。但是有时一些对象，可能是一个model或者service或者signal需要跨越多个Context。在strange 版本v.0.6.0中我们增加了一个机制使得实现跨越更容易。像下面一样容易：
 
@@ -1229,7 +1260,7 @@ injectionBinder.Bind<IStarship>().To<HeartOfGold>().ToSingleton().CrossContext()
 
 　　加上CrossContext()表明这个绑定会跨Context实例化。它将在所有子Context中可用。注意你也可以重写一个CrossContext绑定。如果你做了本地绑定，本地的绑定会覆盖了跨Context的绑定。
 
-## 4.结论
+## 结论
 
 　　上面大概解释了Strange如何使用。现在你了解了很多关于Strange如何运行，它可以做一些事情使得这个世界更美好。我建议你试一试多context的例子，因为它将给你更多的可能。我还建议你用Strange写一些东西，实践出真知。如果你从未用过一个IoC框架，我保证它会优化你的开发方式。如果你用过，我希望它不会让你失望。
 　　最后，Strange是可以扩展的。无穷无尽的绑定器可以被创造。当更多的人接触这种思考方式，我希望我们能够看到更多令人惊艳的插件。
