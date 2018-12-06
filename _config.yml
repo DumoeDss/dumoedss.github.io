@@ -78,7 +78,7 @@ theme: sagiri
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/DumoeDss/dumoedss.github.io.git
+  repository: git@github.com:DumoeDss/dumoedss.github.io.git
   branch: master
 backup:
     type: git

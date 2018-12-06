@@ -6,9 +6,9 @@
     "version": "3.4.4"
   },
   "dependencies": {
-    "aplayer": "^1.6.0",
+    "aplayer": "^1.10.1",
     "balloon-css": "^0.5.0",
-    "dplayer": "^1.17.2",
+    "dplayer": "^1.25.0",
     "hexo": "^3.2.0",
     "hexo-deployer-git": "^0.3.1",
     "hexo-generator-archive": "^0.1.4",

@@ -1,3 +1,4 @@
+
 <nav class="site-nav">
   {% set hasSearch = theme.swiftype_key || theme.algolia_search.enable || theme.tinysou_Key || theme.local_search.enable %}
 
@@ -35,7 +36,7 @@
             <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
           </form>
       </li>
-      <li class="menu-item online"><span id="online-count">?</span>人在线</li>
+  
     </ul>
   {% endif %}
 
@@ -96,4 +97,5 @@
         {{ theme.description }}
     </h2>
 </div>
+
 {% include '../_custom/header.swig' %}
