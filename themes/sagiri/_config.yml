@@ -69,7 +69,7 @@ menu:
   投档: /archives/ || archive
 #  投喂: /donate/ || cutlery
   留言板: /message/ || pencil
-  关于: /about/ || rocket
+  切换服务器: /about/ || rocket
   
 
 # Enable/Disable menu icons.
@@ -101,7 +101,7 @@ social:
   GitHub: https://github.com/DumoeDss || github
   Email: mailto:<ws11579@gmail.com> || envelope
   QQ: /images/qq-g.jpg || qq || qq
-  更多: https://dumoedss.cc || more
+  更多: http://dumoedss.cc || more
 
 social_icons:
   enable: true

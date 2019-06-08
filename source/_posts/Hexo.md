@@ -1,5 +1,6 @@
 ---
 title: Hello Hexo
+date: 2017-12-31 16:24:08
 tags: Hexo
 categories: Blog
 ---
@@ -72,10 +73,15 @@ cnpm install --save hexo-helper-live2d --save
 
 ```
 cnpm install aplayer --save
+
+{% aplayer "歌名" "歌手" "xx.mp3"  "xx.jpg" "autoplay=false" %}
+
 ```
 ### [DPlayer](https://github.com/MoePlayer/DPlayer)
 ```
 cnpm install dplayer --save
+
+{% dplayer "url=xx.mp4"  "pic=xx.jpg" "loop=yes" "theme=#FADFA3" "autoplay=false" "token=tokendemo" %}
 ```
 
 Theme Dependence
