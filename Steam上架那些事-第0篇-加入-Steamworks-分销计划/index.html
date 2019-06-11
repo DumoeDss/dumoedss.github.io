@@ -122,7 +122,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://wx4.sinaimg.cn/mw690/bcd85caely1g3tz0cqkp8j21jk0gvn50.jpg">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/bcd85caely1g3tzkv6y1dj20rc0flq89.jpg">
-<meta property="og:updated_time" content="2019-06-08T14:47:26.580Z">
+<meta property="og:updated_time" content="2019-06-11T02:42:07.410Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Steam上架那些事 第0篇 加入Steamworks分销计划">
 <meta name="twitter:description" content="之前大致了解了一下Steam上架游戏的流程，以为游戏开发到后期再准备上架事宜即可，今天搜索创意工坊的相关信息时发现，对于萌新开发者来说，至少要在游戏发布的两个月之前就要开始准备游戏上架的相关事宜了。本系列用于记录一下首次在Steam上架游戏时踩坑的经历。">
@@ -498,8 +498,9 @@
 <p>付完费之后需要稍等一会，刚开始支付完跳转回来时还是显示付费阶段，等了几分钟之后就跳转到了<strong>输入支付和税务信息</strong>界面，这里如果刷新了界面也可以直接从Steamworks首页的<a href="https://partner.steamgames.com/dashboard" target="_blank" rel="noopener">Dashboard</a>继续操作，不用着急。</p>
 <p>###关于输入支付和税务信息</p>
 <p>Steam付款是境外汇款，付的是美元，所以这里需要银行卡（一般都是储蓄卡）支持接收境外汇款。在这里需要填写开户行的称（英文）、地址（英文）与国际代码等信息。国际代码在银行那边称作<strong>Swift Code</strong>，工行的每个分行固定的（工行的北京分行是<strong>ICBKCNBJBJM</strong>），其他行不清楚。这里直接拨打银行的客服电话询问就行，转到人工客服之后，告诉她账户需要接收境外汇款，先询问一下该银行卡是否支持外汇转入，一般来说都会支持美元欧元等大币种的。然后跟她说需要银行的<strong>Swift Code</strong>及英文信息，她会把<strong>Swift Code</strong>及银行名称与地址的翻译以短信方式发到你手机上。顺便，个人账户每年只有5万美元的结汇金额，就是说5万美元以内都可以转为人民币。（嘛，等达到每年5W的净收入再说吧。</p>
+<p>身份验证的时候可以选择身份证或者护照，填完表之后会收到Steam邮件，要求把身份证/护照拍照发过去验证。</p>
 <p>接着填写税务信息，作为国内的个人开发者，所有美国相关的以及公司相关的选项都不用选就可以了。</p>
-<p>根据说明，STEAM预扣所得税率为0% 至 30%，所以税务信息这里影响的就是扣税的多少。如果符合美国开发者的要求，美区收入可以不用交美国的税（0%），而对于不满足美国开发者要求的国内个人开发者，对于美区收入需要交10%的税。</p>
+<p>根据说明，STEAM预扣所得税率为0% 至 30%，所以税务信息这里影响的就是扣税的多少。如果符合美国开发者的要求，美区收入可以不用交美国的税（0%），而对于不满足美国开发者要求的国内个人开发者，对于美区收入需要交10%的税。这里注意，选择“我不是美国人”之后，有个<strong>是否有TIN</strong>，这里必须填入外籍TIN，也就是身份证号，才是10%的税，不然就是30%的税。这个也可以在后台里进行更改。</p>
 <p>这里把<a href="https://cowlevel.net/people/rosedog" target="_blank" rel="noopener">奶牛关@玫瑰狗</a>在《<a href="https://cowlevel.net/question/1871346?sort_by=vote" target="_blank" rel="noopener">Steam 给中国企业开发者结算收入的时候如何扣税？</a>》的回答贴一下：</p>
 <blockquote>
 <p>全部说的话有点复杂，捡要点说说：</p>
